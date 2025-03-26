@@ -20,7 +20,7 @@ const filePairs = [
 ];
 
 describe('General diff tests', () => {
-  test.each(formats)('complex structures in %s format', (format, expectedFile) => {
+  test.each(formats)('complex structures in %s format', (format) => {
     const file1 = getFixturePath('file1.json');
     const file2 = getFixturePath('file2.yml');
     const result = gendiff(file1, file2, format);

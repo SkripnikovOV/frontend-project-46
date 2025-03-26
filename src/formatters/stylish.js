@@ -34,8 +34,6 @@ const stringify = (value, depth = 1) => {
           return `${indent}  ${node.key}: ${formatStylish(node.children, depth + 1)}`;
         case 'unchanged':
           return `${indent}  ${node.key}: ${stringify(node.value, depth + 1)}`;
-        default:
-          throw new Error(`Unknown node type: ${node.type}`);
       }
     });
   

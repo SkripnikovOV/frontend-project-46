@@ -25,8 +25,6 @@ const buildLines = (nodes, parentPath = '') => {
         return buildLines(node.children, currentPath);
       case 'unchanged':
         return [];
-      default:
-        throw new Error(`Unknown node type: ${node.type}`);
     }
   });
   
