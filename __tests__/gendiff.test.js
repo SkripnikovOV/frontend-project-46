@@ -15,14 +15,14 @@ const formats = [
 
 const filePairs = [
   ['file1.json', 'file2.json'],
-  ['file1.yml', 'file2.yml'],
-  ['file1.json', 'file2.yml'],
+  ['file1.yml', 'file2.yaml'],
+  ['file1.json', 'file2.yaml'],
 ];
 
 describe('General diff tests', () => {
   test.each(formats)('complex structures in %s format', (format) => {
     const file1 = getFixturePath('file1.json');
-    const file2 = getFixturePath('file2.yml');
+    const file2 = getFixturePath('file2.yaml');
     const result = gendiff(file1, file2, format);
     const expected = readFixture(`expected.${format}`);
     if (format === 'json') {
@@ -45,7 +45,7 @@ describe('General diff tests', () => {
 
   test('invalid format throws error', () => {
     const file1 = getFixturePath('file1.json');
-    const file2 = getFixturePath('file2.yml');
+    const file2 = getFixturePath('file2.yaml');
     expect(() => gendiff(file1, file2, 'invalid')).toThrow('Unknown format: invalid');
   });
 
