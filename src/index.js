@@ -1,24 +1,27 @@
-import fs from 'fs';
-import path from 'path';
-import  process  from 'process';
-import genDiff from './genDiff.js';
+import parseFile from './parsers.js';
+import buildDiff from './buildDiff.js';
+import formatStylish from './formatters/stylish.js';
+import formatPlain from './formatters/plain.js';
+import formatJson from './formatters/json.js';
 
-
-const readFile = (filePath) => {
-    const fullPath = path.resolve(process.cwd(), filePath);
-    const data = fs.readFileSync(fullPath, 'utf8');
-    return JSON.parse(data);
-    
+const getFormatter = (format) => {
+  switch (format) {
+    case 'stylish': return formatStylish;
+    case 'plain': return formatPlain;
+    case 'json': return formatJson;
+    default: throw new Error(`Unknown format: ${format}`);
+  }
 };
 
-const getDiff = (filepath1, filepath2, format = 'stylish') => {
-    const data1 = readFile(filepath1);
-    const data2 = readFile(filepath2);
-    const diff = genDiff(data1, data2);
-    console.log(diff);
-    
-        
-    
+const gendiff = (filepath1, filepath2, format = 'stylish') => {
+  if (filepath1 === filepath2) {
+    return "";
+  }
+  const obj1 = parseFile(filepath1);
+  const obj2 = parseFile(filepath2);
+  const diff = buildDiff(obj1, obj2);
+  const formatter = getFormatter(format);
+  return formatter(diff);
 };
 
-export default getDiff;
+export default gendiff;
