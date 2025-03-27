@@ -24,6 +24,7 @@ describe('General diff tests', () => {
     const file1 = getFixturePath('file1.json');
     const file2 = getFixturePath('file2.yaml');
     const result = gendiff(file1, file2, format);
+    console.log(result)
     const expected = readFixture(`expected.${format}`);
     if (format === 'json') {
       expect(() => JSON.parse(result)).not.toThrow();

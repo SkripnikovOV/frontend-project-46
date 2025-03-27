@@ -1,4 +1,6 @@
 /node_modules
 /dist
 /coverage
+filetest1.json
+filetest2.json
 .env

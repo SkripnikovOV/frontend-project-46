@@ -14,7 +14,7 @@ const parseFile = (filePath) => {
   
   switch (ext) {
     case 'json': return JSON.parse(content);
-    case 'yml': 
+    case 'yml':  return yaml.load(content);
     case 'yaml': return yaml.load(content);
   }
 };

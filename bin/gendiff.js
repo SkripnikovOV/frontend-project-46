@@ -11,11 +11,8 @@ program
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format <type>', 'output format (stylish, plain, json)', 'stylish')
   .action((filepath1, filepath2) => {
-    if (!filepath1 || !filepath2) {
-      return {};
-    }
     const options = program.opts();
-    const diff = gendiff(filepath1, filepath2, options.format);
+    const diff = gendiff(filepath1, filepath2, options.format = 'stylish');
     console.log(diff);
   });
 
